@@ -1,0 +1,24 @@
+<table style="width: 100%;" class="table table-bordered">
+    <thead>
+        <th class="text-primary" *ngIf="dateOfCreation">Date Of creation<i class="fa fa-sort" aria-hidden="true" (click)="sort('dateOfCreation')"></i></th>
+        <th class="text-primary" *ngIf="dateOfRecording">Date Of recording <i class="fa fa-sort" aria-hidden="true" (click)="sort('dateOfRecording')"></i></th>
+        <th class="text-primary" *ngIf="status">Status <i class="fa fa-sort" aria-hidden="true"
+            (click)="sort('status')"></i></th>
+        <th class="text-primary" *ngIf="transactionType">Transaction type <i class="fa fa-sort" aria-hidden="true" 
+            (click)="sort('transactionType')"></i></th>
+        <th *ngIf="businessPartnerName">Bussiness partner</th>
+        <th *ngIf="businessPartnerLocation">Bussiness partner Location</th>
+        <th *ngIf="year">Year</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let doc of documentList" [routerLink]="['edit/', doc._id]">
+            <td *ngIf="dateOfCreation">{{doc?.dateOfCreation | date: 'MMM dd, yyyy.'}}</td>
+            <td *ngIf="dateOfRecording">{{doc?.dateOfRecording  | date: 'MMM dd, yyyy.'}}</td>
+            <td *ngIf="status">{{doc?.status}}</td>
+            <td *ngIf="transactionType">{{doc?.transactionType}}</td>
+            <td *ngIf="businessPartnerName">{{doc?.businessPartner.name}}</td>
+            <td *ngIf="businessPartnerLocation">{{doc?.businessPartner.city}}, {{doc?.businessPartner.address}}</td>
+            <td *ngIf="year">{{doc?.year}}</td>
+        </tr>
+    </tbody>
+</table>

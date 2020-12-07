@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col">
+        <table style="width: 100%;" class="ml-3">
+            <tr>
+                <td>Transaction type: <u>{{document?.transactionType}}</u></td>
+                <td><u>Business Partner</u></td>
+                <td>Status: {{document?.status}}</td>
+            </tr>
+            <tr>
+                <td>Date of Creation: {{document?.dateOfCreation | date: 'EEEE, MMMM dd, yyyy.'}}</td>
+                <td>{{document?.businessPartner.name}}</td>
+                <td><button class="btn btn-primary mt-2" [disabled]="document?.status == 'recorded'" (click)="recordDocument()">Record Document</button></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>{{document?.businessPartner.city}},{{document?.businessPartner.address}}</td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-8">
+        <table style="width: 100%;" class="table table-striped table-bordered">
+           <thead>
+               <tr>
+                   <th>Article</th>
+                   <th>Price</th>
+                   <th>Quantity</th>
+                   <th>Total value</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr *ngFor='let a of items'>
+                    <td>{{getName(a?.article)}}</td>
+                    <td>{{a?.price}}</td>
+                    <td>{{a?.quantity}}</td>
+                    <td>{{(a?.quantity*a?.price).toFixed(2)}}</td>
+               </tr>
+           </tbody>
+        </table>
+    </div>
+    <div class="col-4">
+        <h3>Add new Item</h3>
+        <form>
+            <label for="select">Article</label>
+            <select name="select" id="select" class="p-1" [(ngModel)]="article.article" style="width: 100%;">
+                <option [value]="a.code" *ngFor="let a of articles">{{a.code}}</option>
+            </select>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" name="price" class="form-control" id="price" [(ngModel)]="article.price">
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" name="quantity" class="form-control" id="quantity" [(ngModel)]="article.quantity"> 
+            </div>
+            <button type="submit" (click)="addArticle()" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>

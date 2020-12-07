@@ -1,0 +1,38 @@
+<div class="row mt-2">
+    <div class="col-2">
+        <app-pagination [numbOfDocuments]="documentList?.count" [docsPerPage]="params.pageSize" (sendPage)="getPage($event)"></app-pagination>
+    </div>
+    <div class="col-10 text-right">
+        <div *ngIf="btnClose" class="form-check form-check-inline" etyle="width: 100%">
+        <input type="checkbox" id="dateOfCreation" name="dateOfCreation" value="dateOfCreation" (click)="toggleTableCols('dateOfCreation')" [checked]="dateOfCreation">
+        <label for="dateOfCreation"> Date of Creation</label><br>
+        <input type="checkbox" class="ml-2" id="dateOfRecording" name="dateOfRecording" value="dateOfRecording" (click)="toggleTableCols('dateOfRecording')" [checked]="dateOfRecording">
+        <label for="dateOfRecording"> Date of Recording</label><br>
+        <input type="checkbox" id="status" class="ml-2" name="status" value="status" (click)="toggleTableCols('status')" [checked]="status">
+        <label for="status">Status</label><br>
+        <input type="checkbox" id="transactionType" class="ml-2" name="transactionType" value="transactionType" (click)="toggleTableCols('transactionType')" [checked]="transactionType">
+        <label for="transactionType"> Transaction type</label><br>
+        <input type="checkbox" id="businessPartnerName" class="ml-2" name="businessPartnerName" value="businessPartnerName" (click)="toggleTableCols('businessPartnerName')" [checked]="businessPartnerName">
+        <label for="businessPartnerName">Business Partner Name</label><br>
+        <input type="checkbox" id="businessPartnerLocation" class="ml-2" name="businessPartnerLocation" (click)="toggleTableCols('businessPartnerLocation')" value="businessPartnerLocation" [checked]="businessPartnerLocation">
+        <label for="businessPartnerLocation">Business Partner Location</label><br>
+        <input type="checkbox" id="year" name="year" class="ml-2" value="year" (click)="toggleTableCols('year')" [checked]="year">
+        <label for="year">Year</label><br>
+        </div>
+        <button class="btn btn-primary ml-auto" (click)="showBtn('close')" *ngIf="btnOpen">Open table settings</button>
+        <button class="btn btn-secondary" (click)="showBtn('open')" *ngIf="btnClose">Close table settings</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <app-document-list [documentList]="documentList?.results" (sortBy)="setSortParams($event)"
+        [dateOfCreation] = "dateOfCreation"
+        [dateOfRecording] = "dateOfRecording"
+        [status] = "status"
+        [transactionType] = "transactionType"
+        [businessPartnerName] = "businessPartnerName"
+        [businessPartnerLocation] = "businessPartnerName"
+        [year]= "year"
+        ></app-document-list>
+    </div>
+</div>
